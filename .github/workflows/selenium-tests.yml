@@ -10,36 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Puxar código
       - name: Checkout
         uses: actions/checkout@v3
 
-      # 2️⃣ Configurar Java 21
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
 
-      # 3️⃣ Instalar Google Chrome (necessário para Selenium)
       - name: Instalar Google Chrome
         run: |
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable || true
           sudo apt-get install -y chromium-browser || true
 
-      # 4️⃣ Build e rodar testes
-      - name: Build & Test
+      - name: Build & Test (Headless)
         run: mvn clean test
-
-      # 5️⃣ Gerar relatório Allure
-      - name: Gerar relatório Allure
-        run: |
-          mvn allure:report
-
-      # 6️⃣ Publicar relatório no GitHub Pages
-      - name: Publicar relatório no GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./target/site/allure-maven-plugin
