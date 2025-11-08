@@ -1,0 +1,28 @@
+name: Selenium Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Instalar Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable || true
+          sudo apt-get install -y chromium-browser || true
+
+      - name: Build & Test (Headless)
+        run: mvn clean test
