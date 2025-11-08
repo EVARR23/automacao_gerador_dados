@@ -45,8 +45,7 @@ O fluxo automatizado realiza as seguintes ações:
 1. Clonar o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
-
+https://github.com/EVARR23/automacao_gerador_dados.git
+cd automacao_gerador_dados
 
 
